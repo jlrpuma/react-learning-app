@@ -8,14 +8,13 @@ function App() {
   let timeOfDay = hours < 12 ? "morning" : hours >= 12 && hours <= 17 ? "afternoon" : "night";
 
   const styles = {
-    color: "red", 
-    backgroundColor: "black",
+    color: (hours < 12 ? "yellow" : hours >= 12 && hours <= 17 ? "orange" : "black"),
     fontSize: 20
   };
 
   return (
     <div className="App">
-      <h1 style={styles}> Good {timeOfDay} </h1>
+      <h1 style={styles}> Good {timeOfDay} !</h1>
     </div>
   );
 }
