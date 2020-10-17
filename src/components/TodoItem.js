@@ -4,11 +4,16 @@ import './TodoItem.css'
 
 
 function TodoItem(props) {
+
+    let taskStyle = {
+        color: !props.item.status || props.item.status === 'NOTDONE' ? 'red' : 'blue'
+    }
+
     return (
         <div>
             <input type="checkbox"/>
             {/*the item.message property can be handled here (given the proprs of the component)*/}
-            <p> {props.item.message}</p>
+            <p style={taskStyle}> {props.item.message}</p>
         </div>
     );
 }
