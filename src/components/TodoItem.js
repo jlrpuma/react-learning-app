@@ -3,6 +3,9 @@ import Todo from './Todo';
 import './TodoItem.css'
 
 class TodoItem extends React.Component {
+    constructor() {
+        super();
+    }
 
     render() {
         let taskStyle = {
