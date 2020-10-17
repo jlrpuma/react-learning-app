@@ -5,13 +5,15 @@ import './TodoItem.css'
 class TodoItem extends React.Component {
     constructor() {
         super();
-        
+        // binding method in the context this
         this.onChangeTaskStatus =  this.onChangeTaskStatus.bind(this);
     }
 
     onChangeTaskStatus() {
         console.log("status change")
     }
+
+    
 
     render() {
         let taskStyle = {
