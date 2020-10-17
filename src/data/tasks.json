@@ -2,21 +2,25 @@
     {
         "id": 1,
         "message": "first task", 
-        "status": "NOTDONE"
+        "status": "NOTDONE",
+        "deadline": "2020-10-19"
     },
     {
         "id":2,
         "message": "second task", 
-        "status": "NOTDONE"
+        "status": "NOTDONE",
+        "deadline": "2020-10-19"
     },
     {
         "id":3,
         "message": "third task", 
-        "status": "NOTDONE"
+        "status": "NOTDONE",
+        "deadline": "2020-10-15"
     },
     {
         "id":4,
         "message": "fourth task", 
-        "status": "DONE"
+        "status": "DONE",
+        "deadline": "2020-10-22"
     }
 ]
