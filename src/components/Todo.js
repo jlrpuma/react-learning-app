@@ -11,7 +11,8 @@ function Todo(props) {
         task.completed = task.status === "NOTDONE" ? false : true;
         return task;
     })
-    .filter(task => task.deadline ? new Date(task.deadline) > new Date() && task.status === 'NOTDONE' : task)
+    //.filter(task => task.deadline ? new Date(task.deadline) > new Date() && task.status === 'NOTDONE' : task)
+    .filter(task => task.deadline ? new Date(task.deadline) > new Date() : task)
     .sort((task1, task2) => task1.deadline > task2.deadline)
     .map(task => <TodoItem key={task.id} item={task} />);
     

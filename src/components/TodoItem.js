@@ -11,7 +11,7 @@ function TodoItem(props) {
 
     return (
         <div className="todo-item">
-            <input type="checkbox"/>
+            <input type="checkbox" checked={props.item.completed}/>
             {/*the item.message property can be handled here (given the proprs of the component)*/}
             <p style={taskStyle}> {props.item.message}</p>
         </div>
