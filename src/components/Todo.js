@@ -2,15 +2,14 @@ import React from 'react';
 import TodoItem from './TodoItem'
 import './Todo.css'
 
+import tasks from './../data/tasks.json'
+
 function Todo(props) {
+    
+    let taskComponents = tasks.map(task => (<TodoItem key={task.id} item={{message: task.message, status: task.status}}></TodoItem>));
+    
     return (
-        <div className="todo-list">
-            {/*passing item argument as a member of proprs with the message attribute*/}
-            <TodoItem item={{message: 'first task', status: 'NOTDONE'}}/>
-            <TodoItem item={{message: 'second task', status: 'NOTDONE'}}/>
-            <TodoItem item={{message: 'third task'}}/>
-            <TodoItem item={{message: 'fourth task', status: 'DONE'}}/>
-        </div>
+        {taskComponents}
     );
 }
 
