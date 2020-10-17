@@ -16,9 +16,11 @@ class App extends React.Component {
   render() {
       return (
         <div>
-          {/* <Todo/> */}
+          <Todo/> 
+          {/* 
           <h1> Is state important to know?</h1>
           <p>{this.state.answer}</p>
+          */}
         </div>
       )
   }
