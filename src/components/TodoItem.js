@@ -9,11 +9,9 @@ class TodoItem extends React.Component {
         this.onChangeTaskStatus =  this.onChangeTaskStatus.bind(this);
     }
 
-    onChangeTaskStatus() {
-        console.log("status change")
+    onChangeTaskStatus(id) {
+        this.props.handleChange(id);
     }
-
-    
 
     render() {
         let taskStyle = {
@@ -22,9 +20,12 @@ class TodoItem extends React.Component {
 
         return (
             <div className="todo-item">
+                {/* As you can see we are using an anon function in order to call the function given by the parent element that pass the function via props. */}
+                {/* If you can the function directly the function gets executed the number of times that is rendered on the other side. */}
                 <input type="checkbox" 
                 checked={this.props.item.completed} 
-                onChange={this.onChangeTaskStatus}/>
+                onChange={() => this.onChangeTaskStatus(this.props.item.id)}
+                />
                 {/*the item.message property can be handled here (given the proprs of the component)*/}
                 <p style={taskStyle}> {this.props.item.message}</p>
             </div>

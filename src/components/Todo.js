@@ -15,6 +15,7 @@ class Todo extends React.Component {
         // i dont like the way that you need to bind the function in the constructor before can use it on the render method
         // this is needed if you want to use the state variable on that method
         this.printCount =  this.printCount.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     processInfo() {
@@ -32,10 +33,19 @@ class Todo extends React.Component {
         console.log(this.state.tasks.length);
     }
 
+    handleChange(id) {
+        console.log("Handling change on element:" + id );        
+        /*
+        this.setState(
+            tasks: 
+        )
+        */
+    }
+
     render() {
         /* this keyword is needed for access your own methods on the class */
         this.processInfo();
-        let taskComponents =  this.state.tasks.map(task => <TodoItem key={task.id} item={task} />)
+        let taskComponents =  this.state.tasks.map(task => <TodoItem key={task.id} item={task} handleChange={this.handleChange}/>)
         return (
             <div className="todo-list">
                 {taskComponents}
