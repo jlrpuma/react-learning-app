@@ -1,17 +1,7 @@
 import React from 'react';
-import Todo from './Todo';
 import './TodoItem.css'
 
 class TodoItem extends React.Component {
-    constructor() {
-        super();
-        // binding method in the context this
-        this.onChangeTaskStatus =  this.onChangeTaskStatus.bind(this);
-    }
-
-    onChangeTaskStatus(id) {
-        this.props.handleChange(id);
-    }
 
     render() {
         let taskStyle = {
@@ -24,7 +14,7 @@ class TodoItem extends React.Component {
                 {/* If you can the function directly the function gets executed the number of times that is rendered on the other side. */}
                 <input type="checkbox" 
                 checked={this.props.item.completed} 
-                onChange={() => this.onChangeTaskStatus(this.props.item.id)}
+                onChange={() => this.props.handleChange(this.props.item.id)}
                 />
                 {/*the item.message property can be handled here (given the proprs of the component)*/}
                 <p style={taskStyle}> {this.props.item.message}</p>
