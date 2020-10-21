@@ -11,17 +11,15 @@ class Todo extends React.Component {
         this.state = {
             tasks: tasks
         };
-
-        // i dont like the way that you need to bind the function in the constructor before can use it on the render method
-        // this is needed if you want to use the state variable on that method
         this.printCount =  this.printCount.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.processInfo = this.processInfo.bind(this);
     }
 
     processInfo() {
         this.state.tasks
         .map(task => {
-            task.completed = task.status === "NOTDONE" ? false : true;
+            task.completed = (task.status === "NOTDONE" ? false : true);
             return task;
         })
         //.filter(task => task.deadline ? new Date(task.deadline) > new Date() && task.status === 'NOTDONE' : task)
@@ -34,12 +32,25 @@ class Todo extends React.Component {
     }
 
     handleChange(id) {
-        console.log("Handling change on element:" + id );        
-        /*
-        this.setState(
-            tasks: 
+        // here we use the prev state, cuz the change is based on the preious state of the task...
+        this.setState(prevState => {
+                const updatedTasks = prevState.tasks.map(task => {
+                    if (task.id === id) {
+                        /* The tasks status property cannot be modified directly because we are changing the prevState values
+                          task.status = (task.status === "NOTDONE" ? "DONE" : "NOTDONE");
+                          a better way to do that is return a new object with the modified status */
+                        return {
+                            ...task, // cloning the object 
+                            status : (task.status === "NOTDONE" ? "DONE" : "NOTDONE") // change the status attribute value
+                        }
+                    }
+                    return task;
+                });
+                return {
+                    tasks: updatedTasks
+                };
+            }            
         )
-        */
     }
 
     render() {
