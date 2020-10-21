@@ -22,6 +22,10 @@ class TodoItem extends React.Component {
         */
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        /* Perform actios every time that the component has an update on its loaded information */
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         /*
         React by default will re render all the components that are included on the parent, thats costly
