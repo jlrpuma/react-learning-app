@@ -2,18 +2,23 @@ import React from 'react';
 import TodoItem from './TodoItem'
 import './Todo.css'
 
-import tasks from './../data/tasks.json'
 
 class Todo extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            tasks: tasks
+            tasks: []
         };
         this.printCount =  this.printCount.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.processInfo = this.processInfo.bind(this);
+    }
+
+    componentDidMount() {
+        fetch("http://localhost:3001/")
+        .then(response => response.json())
+        .then(data => this.setState({tasks: data}));
     }
 
     processInfo() {
