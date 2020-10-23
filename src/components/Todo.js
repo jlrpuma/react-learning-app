@@ -8,6 +8,7 @@ class Todo extends React.Component {
     constructor() {
         super();
         this.state = {
+            loading: false,
             tasks: []
         };
         this.printCount =  this.printCount.bind(this);
@@ -16,9 +17,16 @@ class Todo extends React.Component {
     }
 
     componentDidMount() {
+        this.setState(
+            {
+                loading: true,
+                tasks: []
+            }
+        )
+
         fetch("http://localhost:3001/")
         .then(response => response.json())
-        .then(data => this.setState({tasks: data}));
+        .then(data => this.setState({loading: false, tasks: data}));
     }
 
     processInfo() {
@@ -64,11 +72,16 @@ class Todo extends React.Component {
         this.processInfo();
         let taskComponents =  this.state.tasks.map(task => <TodoItem key={task.id} item={task} handleChange={this.handleChange}/>)
         return (
-            <div className="todo-list">
-                {taskComponents}
-                {/*Camel cased functions (but same as a plain javascript handler [onclick])*/}
-                {/*The funciton needs to be called in this way this.functionName*/}
-                <button onClick={this.printCount}> Print Count Tasks</button>
+            <div>
+            {   this.state.loading ? 
+                <p> Loading . . . </p> :
+                <div className="todo-list">
+                    {taskComponents}
+                    {/*Camel cased functions (but same as a plain javascript handler [onclick])*/}
+                    {/*The funciton needs to be called in this way this.functionName*/}
+                    <button onClick={this.printCount}> Print Count Tasks</button>
+                </div>            
+            }
             </div>        
         );
     }
