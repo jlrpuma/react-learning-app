@@ -9,11 +9,13 @@ class Todo extends React.Component {
         super();
         this.state = {
             loading: false,
-            tasks: []
+            tasks: [],
+            newTask: {name : 'The new task name....'}
         };
         this.printCount =  this.printCount.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.processInfo = this.processInfo.bind(this);
+        this.handleChangeFormTaskName =  this.handleChangeFormTaskName.bind(this);
     }
 
     componentDidMount() {
@@ -67,6 +69,15 @@ class Todo extends React.Component {
     }
 
 
+    handleChangeFormTaskName(event) {
+        // we need handle the change of this input in order to stablish a new state of that value
+        
+        // Destructuring (this helps to avoid problems related with access directly the event value)
+        const {name, value} = event.target;
+
+        this.setState({newTask: {[name] : value}})
+    }
+
     render() {
         /* this keyword is needed for access your own methods on the class */
         this.processInfo();
@@ -76,6 +87,15 @@ class Todo extends React.Component {
             {   this.state.loading ? 
                 <p> Loading . . . </p> :
                 <div className="todo-list">
+                    <form>
+                        <label>
+                            Name:
+                            <input type="text" name="name" placeholder="New task info" onChange={this.handleChangeFormTaskName}/>
+                            <p>{this.state.newTask.name}</p>
+                        </label>
+                        <input type="submit" value="Add Task" />
+                    </form>
+
                     {taskComponents}
                     {/*Camel cased functions (but same as a plain javascript handler [onclick])*/}
                     {/*The funciton needs to be called in this way this.functionName*/}
