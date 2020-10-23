@@ -1,6 +1,7 @@
 import React from 'react';
-import TodoItem from './TodoItem'
-import './Todo.css'
+import TodoItem from './TodoItem';
+import FormTaskContainer from './FormTaskContainer';
+import './Todo.css';
 
 
 class Todo extends React.Component {
@@ -9,18 +10,11 @@ class Todo extends React.Component {
         super();
         this.state = {
             loading: false,
-            tasks: [],
-            newTask: {
-                name: 'The new task name....',
-                isImportant: true,
-                backColor: 'default'
-            }
+            tasks: []
         };
         this.printCount =  this.printCount.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.processInfo = this.processInfo.bind(this);
-        this.handleChangeFormTask =  this.handleChangeFormTask.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -73,41 +67,6 @@ class Todo extends React.Component {
         )
     }
 
-
-    handleChangeFormTask(event) {
-        // we need handle the change of this input in order to stablish a new state of that value
-        
-        // Destructuring (this helps to avoid problems related with access directly the event value)
-        const {name, value, type, checked} = event.target;
-
-        type === "checkbox" ? 
-
-        // in order to have updated the entire object you have to set to the new state the values of the prevState 
-        // and then modify the value of the attribute that you need to change.
-        this.setState(prevState => {
-            return {
-                newTask: {
-                    ...prevState.newTask,
-                    [name] : checked
-                }
-            }
-        }) : 
-        this.setState(prevState => {
-            return {
-                newTask: {
-                    ...prevState.newTask,
-                    [name] : value
-                }
-            }
-        });
-
-    }
-
-    handleSubmit(e) {
-        console.log(this.state);
-        e.preventDefault();
-    }
-
     render() {
         /* this keyword is needed for access your own methods on the class */
         this.processInfo();
@@ -117,42 +76,7 @@ class Todo extends React.Component {
             {   this.state.loading ? 
                 <p> Loading . . . </p> :
                 <div className="todo-list">
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Name:
-                            <input type="text" name="name" placeholder="New task info" onChange={this.handleChangeFormTask}/>
-                            {/* <p>{this.state.newTask.name}</p> */}
-                        </label>
-                        <br/>
-                        <label>
-                            Important:
-                            <input name="isImportant" type="checkbox" checked={this.state.newTask.isImportant} onChange={this.handleChangeFormTask}/>
-                        </label>
-                        <br/>
-                        <br/>
-                        <label>
-                            Long task
-                            <input name="size" type="radio" value="long" checked={this.state.newTask.size === 'long'} onChange={this.handleChangeFormTask}/>
-                        </label>
-                        <br/>
-                        <label>
-                            Short task
-                            <input name="size" type="radio" value="short" checked={this.state.newTask.size === 'short'} onChange={this.handleChangeFormTask}/>
-                        </label>
-                        <br/>
-                        <label>Background Color:</label>
-                        <select value={this.state.newTask.backColor} onChange={this.handleChangeFormTask} name="backColor">
-                            <option value="default">Default</option>
-                            <option value="blue">Blue</option>
-                            <option value="green">Green</option>
-                            <option value="red">Red</option>
-                            <option value="orange">Orange</option>
-                            <option value="yellow">Yellow</option>
-                        </select>
-                        <br/>
-                        <button>Add Task</button>
-                    </form>
-
+                    <FormTaskContainer />
                     {taskComponents}
                     {/*Camel cased functions (but same as a plain javascript handler [onclick])*/}
                     {/*The funciton needs to be called in this way this.functionName*/}
