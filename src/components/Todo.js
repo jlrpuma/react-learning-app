@@ -12,9 +12,10 @@ class Todo extends React.Component {
             loading: false,
             tasks: []
         };
-        this.printCount =  this.printCount.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.processInfo = this.processInfo.bind(this);
+        // This methods doesn't need to be binded on the constructor given they are using anon functions to work
+        // this.printCount =  this.printCount.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+        // this.processInfo = this.processInfo.bind(this);
     }
 
     componentDidMount() {
@@ -30,7 +31,7 @@ class Todo extends React.Component {
         .then(data => this.setState({loading: false, tasks: data}));
     }
 
-    processInfo() {
+    processInfo = () => {
         this.state.tasks
         .map(task => {
             task.completed = (task.status === "NOTDONE" ? false : true);
@@ -41,11 +42,11 @@ class Todo extends React.Component {
         .sort((task1, task2) => task1.deadline > task2.deadline);
     }
 
-    printCount(){
+    printCount = () => {
         console.log(this.state.tasks.length);
     }
 
-    handleChange(id) {
+    handleChange = (id) => {
         // here we use the prev state, cuz the change is based on the preious state of the task...
         this.setState(prevState => {
                 const updatedTasks = prevState.tasks.map(task => {

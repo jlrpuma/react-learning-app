@@ -11,11 +11,12 @@ class FormTaskContainer extends React.Component {
                 backColor: 'default'
             }
         }
-        this.handleChangeFormTask =  this.handleChangeFormTask.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // This methods doesn't need to be binded on the constructor given they are using anon functions to work
+        // this.handleChangeFormTask =  this.handleChangeFormTask.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChangeFormTask(event) {
+    handleChangeFormTask = (event) => {
         // we need handle the change of this input in order to stablish a new state of that value
         
         // Destructuring (this helps to avoid problems related with access directly the event value)
@@ -44,11 +45,10 @@ class FormTaskContainer extends React.Component {
 
     }
     
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         console.log(this.state);
         e.preventDefault();
     }
-
 
     render() {
         return (
